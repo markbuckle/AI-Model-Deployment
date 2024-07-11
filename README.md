@@ -12,5 +12,12 @@ Steps:
 8.** Deploy via GitHub repo: **In the Azure Deployment Center, connect your GitHub repository to your App Service and then click 'save'. This will enable continuous integration and deployment, so your app will be automatically updated whenever you push changes to the specified branch. Make sure to select the correct branch.
 9. **Create a startup.txt file**
 Create a startup.txt file in the root of your project with the following content. This file will be used to configure Gunicorn as the application server for your Flask app when deployed to Azure.
+10. **Update the Startup Command in Azure**. In the Azure portal, navigate to your App Service, and then go to Configuration > General Settings. Under the "Startup command" field, enter 'startup.txt' and click "Save" to apply the changes.
+11.** Update the Web App Configuration with Keys and Secrets**. In the Azure portal, navigate to your App Service, and then go to Enivornment Variables > App settings. Add the following keys and their respective values. Make sure to replace the placeholder values with your actual keys and secrets. Click "Save" to apply the changes.
 
-gunicorn --bind=0.0.0.0 --timeout 600 --chdir slack app:flask_app
+    OPENAI_API_KEY: Your OpenAI API key
+    SLACK_BOT_TOKEN: Your Slack bot token (starts with "xoxb-")
+    SLACK_BOT_USER_ID: Your Slack bot user ID
+    SLACK_SIGNING_SECRET: Your Slack signing secret
+
+12.
