@@ -10,3 +10,7 @@ Steps:
 6. In the Azure Portal, fill out your new App Service details. Associate it with the LangChain-Experiments resource group. Set publish to Code, and select the correct Python version and your Region. Give it a global name, something like 'ai-docs-chatbot'. Finally, select an appropriate App Service Plan based on your needs. The free plan is fine for just getting started.
 7. Press 'review + create' and then 'create' again. Once you see the notification "deployment suceeded' you should 'go to the resource'
 8.** Deploy via GitHub repo: **In the Azure Deployment Center, connect your GitHub repository to your App Service and then click 'save'. This will enable continuous integration and deployment, so your app will be automatically updated whenever you push changes to the specified branch. Make sure to select the correct branch.
+9. **Create a startup.txt file**
+Create a startup.txt file in the root of your project with the following content. This file will be used to configure Gunicorn as the application server for your Flask app when deployed to Azure.
+
+gunicorn --bind=0.0.0.0 --timeout 600 --chdir slack app:flask_app
